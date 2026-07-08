@@ -8,6 +8,7 @@
 const TIME_SLOTS = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
 let selectedSlot = null;
 const BOOKING_ENDPOINT = (window.BOOKING_ENDPOINT || new URLSearchParams(window.location.search).get("bookingEndpoint") || "").trim();
+const BOOKING_WHATSAPP_NUMBER = "0645386347";
 
 function renderSlots() {
   const wrap = document.getElementById("slotsContainer");
@@ -71,13 +72,16 @@ async function handleBookingSubmit(e) {
 
       const result = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(result.error || "Booking submission failed");
+        throw new Error(result.error || result.message || "Booking submission failed");
       }
 
       form.reset();
       selectedSlot = null;
       renderSlots();
-      showToast("Booking submitted successfully.");
+      if (result.whatsappUrl) {
+        window.open(result.whatsappUrl, "_blank");
+      }
+      showToast(result.message || "Your booking has been reserved.");
       return;
     } catch (error) {
       console.error(error);
@@ -92,9 +96,9 @@ async function handleBookingSubmit(e) {
   msg += `Name: ${name}\nPhone: ${phone}\nService: ${serviceLabel}\nDate: ${date}\nTime: ${selectedSlot}\n`;
   if (notes) msg += `Notes: ${notes}\n`;
 
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  const url = `https://wa.me/${BOOKING_WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank");
-  showToast("Opening WhatsApp to confirm your booking…");
+  showToast("Your booking has been reserved.");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
