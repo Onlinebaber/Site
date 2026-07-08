@@ -4,7 +4,7 @@ async function loadTestimonials() {
   const grid = document.getElementById("testimonialGrid");
   if (!grid) return;
   try {
-    const res = await fetch("testimonials.json");
+    const res = await fetch("./data/testimonials.json");
     const data = await res.json();
     grid.innerHTML = data.testimonials.map(t => `
       <div class="testimonial-card">

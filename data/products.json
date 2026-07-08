@@ -2,19 +2,19 @@
   "hair-products": [
     {
       "id": "hair-product-1",
-      "name": "Hair Product 1 — Add Name",
-      "price": 0,
-      "description": "Add a short description of this product here (what it does, how to use it, size in ml/g).",
-      "image": "assets/catalog/hair-products/product-1/main.svg",
+      "name": "Shampoo",
+      "price": 60,
+      "description": "A clean, nourishing shampoo for fresh hair and easy styling.",
+      "image": "./assets/catalog/hair-products/product-1/file_000000004f847243bcbbc1ead606c2f4.png",
       "sizes": null,
       "inStock": true
     },
     {
       "id": "hair-product-2",
-      "name": "Hair Product 2 — Add Name",
-      "price": 0,
-      "description": "Add a short description of this product here (what it does, how to use it, size in ml/g).",
-      "image": "assets/catalog/hair-products/product-2/main.svg",
+      "name": "Wave Wax",
+      "price": 25,
+      "description": "A flexible wave wax for hold, definition and a smooth finish.",
+      "image": "./assets/catalog/hair-products/product-2/file_000000006cec7243a1beeb3815483240.png",
       "sizes": null,
       "inStock": true
     },
@@ -23,7 +23,7 @@
       "name": "Hair Product 3 — Add Name",
       "price": 0,
       "description": "Add a short description of this product here (what it does, how to use it, size in ml/g).",
-      "image": "assets/catalog/hair-products/product-3/main.svg",
+      "image": "./assets/catalog/hair-products/product-3/main.svg",
       "sizes": null,
       "inStock": true
     }
@@ -31,10 +31,10 @@
   "brushes": [
     {
       "id": "brush-1",
-      "name": "Barber Brush — Add Name",
-      "price": 0,
+      "name": "Hair Brush",
+      "price": 80,
       "description": "Add a short description of this brush here (bristle type, best for which hair type, etc.).",
-      "image": "assets/catalog/brushes/brush-1/main.svg",
+      "image": "./assets/catalog/brushes/brush-1/main.svg",
       "sizes": null,
       "inStock": true
     }
@@ -45,7 +45,7 @@
       "name": "Online Barber T-Shirt",
       "price": 0,
       "description": "Add a short description of the t-shirt here (fabric, fit, print detail).",
-      "image": "assets/catalog/clothing/tshirts/main.svg",
+      "image": "./assets/catalog/clothing/tshirts/file_000000008a1871f4b891ce14688ca613.png",
       "sizes": ["S", "M", "L"],
       "inStock": true
     },
@@ -54,7 +54,7 @@
       "name": "Online Barber Hoodie",
       "price": 0,
       "description": "Add a short description of the hoodie here (fabric, fit, print detail).",
-      "image": "assets/catalog/clothing/hoodies/main.svg",
+      "image": "./assets/catalog/clothing/hoodies/file_00000000c65471f48be5c229c2ad8a69.png",
       "sizes": ["S", "M", "L"],
       "inStock": true
     },
@@ -63,7 +63,7 @@
       "name": "Online Barber Tracksuit",
       "price": 0,
       "description": "Add a short description of the tracksuit here (fabric, fit, print detail).",
-      "image": "assets/catalog/clothing/tracksuits/main.svg",
+      "image": "./assets/catalog/clothing/tracksuits/main.svg",
       "sizes": ["S", "M", "L"],
       "inStock": true
     }

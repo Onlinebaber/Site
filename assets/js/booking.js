@@ -7,6 +7,7 @@
 
 const TIME_SLOTS = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
 let selectedSlot = null;
+const BOOKING_ENDPOINT = (window.BOOKING_ENDPOINT || new URLSearchParams(window.location.search).get("bookingEndpoint") || "").trim();
 
 function renderSlots() {
   const wrap = document.getElementById("slotsContainer");
@@ -21,8 +22,23 @@ function renderSlots() {
   });
 }
 
-function handleBookingSubmit(e) {
+function persistDemoBooking(payload) {
+  const bookingKey = "online_barber_last_booking";
+  let history = [];
+  try {
+    history = JSON.parse(localStorage.getItem(bookingKey) || "[]");
+  } catch (e) {
+    history = [];
+  }
+
+  history.unshift({ ...payload, createdAt: new Date().toISOString() });
+  if (history.length > 10) history = history.slice(0, 10);
+  localStorage.setItem(bookingKey, JSON.stringify(history));
+}
+
+async function handleBookingSubmit(e) {
   e.preventDefault();
+  const form = document.getElementById("bookingForm");
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const service = document.getElementById("service");
@@ -35,6 +51,43 @@ function handleBookingSubmit(e) {
     return;
   }
 
+  const payload = {
+    name,
+    phone,
+    service: service.value,
+    serviceLabel,
+    date,
+    slot: selectedSlot,
+    notes
+  };
+
+  if (BOOKING_ENDPOINT) {
+    try {
+      const response = await fetch(BOOKING_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result.error || "Booking submission failed");
+      }
+
+      form.reset();
+      selectedSlot = null;
+      renderSlots();
+      showToast("Booking submitted successfully.");
+      return;
+    } catch (error) {
+      console.error(error);
+      persistDemoBooking(payload);
+      showToast("Booking endpoint unavailable; saved locally for testing.");
+      return;
+    }
+  }
+
+  persistDemoBooking(payload);
   let msg = `Hi Online Barber! I'd like to book an appointment.\n\n`;
   msg += `Name: ${name}\nPhone: ${phone}\nService: ${serviceLabel}\nDate: ${date}\nTime: ${selectedSlot}\n`;
   if (notes) msg += `Notes: ${notes}\n`;

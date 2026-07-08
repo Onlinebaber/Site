@@ -15,7 +15,7 @@ let CATALOG = {};
 let ACTIVE_TAB = "hair-products";
 
 async function loadCatalog() {
-  const res = await fetch("data/products.json");
+  const res = await fetch("./data/products.json");
   CATALOG = await res.json();
   renderTabs();
   renderGrid();

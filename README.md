@@ -1,42 +1,53 @@
-# Catalog folder structure
+# Online Barber site
 
-Each product gets its own folder with its image(s) inside. The site reads
-product info (name, price, description, sizes) from `/data/products.json` —
-that file just points at the image path inside these folders.
+This repository now uses a GitHub Pages-friendly structure with the main pages at the repository root and the supporting assets in dedicated folders.
+
+## Structure
 
 ```
-assets/catalog/
-├── hair-products/
-│   ├── product-1/   → main.svg (placeholder — replace with main.jpg)
-│   ├── product-2/
-│   └── product-3/
-├── brushes/
-│   └── brush-1/
-└── clothing/
-    ├── tshirts/
-    ├── hoodies/
-    └── tracksuits/
+.
+├── index.html
+├── shop.html
+├── .nojekyll
+├── assets/
+│   ├── css/style.css
+│   ├── images/online-barber-logo.webp
+│   ├── images/team-photo.jpg
+│   └── js/{booking,cart,shop,testimonials}.js
+├── data/
+│   ├── products.json
+│   └── testimonials.json
+└── assets/catalog/...
 ```
 
-## Adding a real photo
+## Run locally
 
-1. Drop your photo into the matching folder, e.g. `hair-products/product-1/main.jpg`
-2. Open `data/products.json`
-3. Update that product's `"image"` field to point at the new file, e.g.
-   `"image": "assets/catalog/hair-products/product-1/main.jpg"`
-4. Update `"name"`, `"price"`, and `"description"` while you're there
+```bash
+python3 -m http.server 8080
+```
 
-## Adding a brand new product
+Then open http://localhost:8080.
 
-1. Create a new folder, e.g. `assets/catalog/hair-products/product-4/`
-2. Add your photo inside it
-3. Copy an existing product entry in `data/products.json`, paste it into the
-   same category array, and edit the id/name/price/description/image path
+## GitHub Pages
 
-## Clothing sizes
+1. Push the repository to GitHub.
+2. Open the repository settings and enable GitHub Pages.
+3. Choose the main branch and the root folder.
+4. The site will be published at the repository Pages URL.
 
-Clothing items have a `"sizes"` array, e.g. `["S", "M", "L"]`. Add or remove
-sizes there — the shop page renders whatever sizes you list. Hair products
-and brushes should keep `"sizes": null` since they don't need sizing.
+## Content updates
 
-Recommended photo size: roughly square, at least 800×800px, JPG or PNG.
+- Edit [data/products.json](data/products.json) to update products, prices, and images.
+- Edit [data/testimonials.json](data/testimonials.json) to add client reviews.
+- Replace placeholder WhatsApp details in [assets/js/cart.js](assets/js/cart.js) and [assets/js/booking.js](assets/js/booking.js).
+- Replace the placeholder brand assets in [assets/images](assets/images) and [assets/catalog](assets/catalog) with real files.
+
+## Catalog image layout
+
+Each product uses its own folder under [assets/catalog](assets/catalog) with a main image file such as main.jpg or main.svg.
+
+Example:
+
+```text
+assets/catalog/hair-products/product-1/main.jpg
+```
